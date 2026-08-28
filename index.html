@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nadia Ouchchikh — Développeuse Web</title>
+<meta name="description" content="Portfolio de Nadia Ouchchikh, développeuse web junior front-end & back-end.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d100e;
+    --bg-raise: #141a16;
+    --surface: #171e19;
+    --surface-line: #2a352d;
+    --text: #f2efe6;
+    --text-muted: #9ba39a;
+    --gold: #c9a463;
+    --gold-dim: #7d6a45;
+    --emerald: #5a8a72;
+    --radius: 14px;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Fraunces', serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(201,164,99,0.07), transparent 60%),
+      radial-gradient(900px 500px at 100% 20%, rgba(90,138,114,0.06), transparent 55%);
+    pointer-events:none; z-index:0;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(12px);
+    background:rgba(13,16,14,0.78);
+    border-bottom:1px solid var(--surface-line);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; height:74px;}
+  .logo{
+    font-family:var(--display); font-weight:600; font-style:italic; font-size:19px;
+    color:var(--text); letter-spacing:0.01em;
+  }
+  .logo em{color:var(--gold); font-style:normal;}
+  .navlinks{display:flex; gap:34px; font-size:13.5px;}
+  .navlinks a{
+    color:var(--text-muted); text-decoration:none;
+    transition:color .25s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--gold);}
+  .navlinks a:focus-visible{outline:1px solid var(--gold); outline-offset:4px;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 100px; position:relative;}
+  .hero-grid{
+    display:grid; grid-template-columns: 1fr 340px;
+    gap:64px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; color:var(--gold);
+    letter-spacing:0.16em; text-transform:uppercase;
+    display:flex; align-items:center; gap:12px; margin-bottom:22px;
+  }
+  .eyebrow .line{width:36px; height:1px; background:var(--gold-dim);}
+  h1{
+    font-family:var(--display); font-weight:500;
+    font-size:clamp(2.6rem, 5.2vw, 4.1rem);
+    line-height:1.08; letter-spacing:-0.01em;
+    margin-bottom:24px;
+  }
+  h1 em{font-style:italic; color:var(--gold); font-weight:500;}
+  .hero p.lead{
+    color:var(--text-muted); font-size:1.08rem; max-width:48ch; margin-bottom:38px;
+  }
+  .cta-row{display:flex; flex-wrap:wrap; gap:16px;}
+  .btn{
+    font-size:13.5px; font-weight:500;
+    padding:13px 24px; border-radius:100px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    border:1px solid transparent;
+  }
+  .btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  .btn-primary{background:var(--gold); color:#181205; font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px); background:#dab777;}
+  .btn-ghost{border-color:var(--surface-line); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold); transform:translateY(-2px);}
+
+  /* portrait frame */
+  .portrait{
+    position:relative;
+    justify-self:end;
+  }
+  .portrait::before{
+    content:'';
+    position:absolute; top:18px; left:18px; right:-18px; bottom:-18px;
+    border:1px solid var(--gold-dim);
+    border-radius:var(--radius);
+    z-index:0;
+  }
+  .portrait img{
+    position:relative; z-index:1;
+    width:280px; height:340px; object-fit:cover; object-position:center 18%;
+    border-radius:var(--radius);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .portrait-tag{
+    position:absolute; z-index:2; bottom:-16px; left:-16px;
+    background:var(--surface); border:1px solid var(--surface-line);
+    border-radius:10px; padding:10px 16px;
+    font-family:var(--mono); font-size:11px; color:var(--text-muted);
+    display:flex; align-items:center; gap:8px;
+    box-shadow:0 12px 30px -12px rgba(0,0,0,0.5);
+  }
+  .portrait-tag i{
+    width:7px; height:7px; border-radius:50%; background:var(--emerald);
+    box-shadow:0 0 6px var(--emerald);
+  }
+
+  /* thin ornamental divider */
+  .divider{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    padding:0 0 8px;
+  }
+  .divider .l{height:1px; width:80px; background:linear-gradient(90deg, transparent, var(--surface-line));}
+  .divider .r{height:1px; width:80px; background:linear-gradient(270deg, transparent, var(--surface-line));}
+  .divider .mark{width:5px; height:5px; border-radius:50%; background:var(--gold-dim);}
+
+  /* ---------- section ---------- */
+  section{padding:60px 0;}
+  .section-head{margin-bottom:40px;}
+  .section-eyebrow{
+    font-family:var(--mono); font-size:11px; color:var(--gold-dim);
+    letter-spacing:0.14em; text-transform:uppercase; margin-bottom:10px;
+  }
+  h2{
+    font-family:var(--display); font-size:2rem; font-weight:500; letter-spacing:-0.01em;
+  }
+
+  /* ---------- stats ---------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--surface-line); border:1px solid var(--surface-line);
+    border-radius:var(--radius); overflow:hidden; margin-top:4px;
+  }
+  .stat{background:var(--surface); padding:26px 20px;}
+  .stat .num{font-family:var(--display); font-size:2.1rem; color:var(--gold); font-weight:500;}
+  .stat .label{font-size:12.5px; color:var(--text-muted); margin-top:6px;}
+
+  /* ---------- skills ---------- */
+  .skill-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
+  .skill-card{
+    background:var(--surface); border:1px solid var(--surface-line);
+    border-radius:var(--radius); padding:24px 24px 20px;
+    transition:border-color .25s ease;
+  }
+  .skill-card:hover{border-color:var(--gold-dim);}
+  .skill-card h3{
+    font-family:var(--display); font-style:italic; font-size:15px; font-weight:500;
+    color:var(--gold); margin-bottom:16px;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{
+    font-size:12.5px; padding:7px 13px; border-radius:100px;
+    background:transparent; border:1px solid var(--surface-line);
+    color:var(--text-muted);
+  }
+
+  /* ---------- projects ---------- */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .proj-card{
+    background:var(--surface); border:1px solid var(--surface-line);
+    border-radius:var(--radius); padding:30px;
+    display:flex; flex-direction:column; gap:16px;
+    transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .proj-card:hover{
+    border-color:var(--gold-dim); transform:translateY(-4px);
+    box-shadow:0 24px 50px -30px rgba(0,0,0,0.7);
+  }
+  .proj-tag{
+    font-family:var(--mono); font-size:10.5px; color:var(--emerald);
+    text-transform:uppercase; letter-spacing:0.1em;
+  }
+  .proj-card h3{font-family:var(--display); font-size:1.35rem; font-weight:500;}
+  .proj-card p{color:var(--text-muted); font-size:0.95rem;}
+  .proj-stack{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+  .proj-stack .chip{font-size:11.5px; padding:5px 11px;}
+  .repo-note{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-muted);
+    border-top:1px solid var(--surface-line); padding-top:14px;
+  }
+  .repo-note a{color:var(--gold); text-decoration:none; border-bottom:1px dotted var(--gold-dim);}
+  .repo-note a:hover{color:#dab777;}
+
+  /* ---------- timeline ---------- */
+  .timeline{border-left:1px solid var(--surface-line); padding-left:30px; display:flex; flex-direction:column; gap:34px;}
+  .tl-item{position:relative;}
+  .tl-item::before{
+    content:''; position:absolute; left:-35px; top:5px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--gold);
+  }
+  .tl-date{font-family:var(--mono); font-size:11.5px; color:var(--gold); margin-bottom:6px; letter-spacing:0.04em;}
+  .tl-item h3{font-family:var(--display); font-size:1.2rem; font-weight:500; margin-bottom:6px;}
+  .tl-item p{color:var(--text-muted); font-size:0.94rem; max-width:62ch;}
+  .demo-links{display:flex; gap:10px; margin-top:12px;}
+  .demo-links a{
+    font-size:12px; padding:6px 14px; border-radius:100px;
+    border:1px solid var(--surface-line); text-decoration:none; color:var(--text-muted);
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .demo-links a:hover{border-color:var(--gold); color:var(--gold);}
+
+  /* ---------- languages ---------- */
+  .lang-list{display:flex; flex-direction:column; gap:18px; max-width:540px;}
+  .lang-row{display:grid; grid-template-columns:126px 1fr 96px; align-items:center; gap:16px;}
+  .lang-name{font-family:var(--display); font-size:14.5px;}
+  .lang-bar{height:3px; border-radius:3px; background:var(--surface-line); overflow:hidden;}
+  .lang-bar > i{display:block; height:100%; background:var(--gold); border-radius:3px;}
+  .lang-level{font-family:var(--mono); font-size:11px; color:var(--text-muted); text-align:right;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--surface-line); padding:64px 0 44px;}
+  .contact-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:36px;}
+  .contact-grid h2{margin-bottom:12px;}
+  .contact-grid p{color:var(--text-muted); max-width:44ch; margin-bottom:0;}
+  .contact-list{display:flex; flex-direction:column; gap:12px; font-size:14px;}
+  .contact-list a{text-decoration:none; color:var(--text); transition:color .2s ease;}
+  .contact-list a:hover{color:var(--gold);}
+  .status-line{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-muted);
+    margin-top:40px; padding-top:24px; border-top:1px solid var(--surface-line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width: 860px){
+    .hero-grid{grid-template-columns:1fr; gap:48px;}
+    .portrait{justify-self:start;}
+    .portrait img{width:220px; height:270px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .skill-grid{grid-template-columns:1fr;}
+    .proj-grid{grid-template-columns:1fr;}
+    .lang-row{grid-template-columns:96px 1fr 74px;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">Nadia <em>Ouchchikh</em></div>
+    <div class="navlinks">
+      <a href="#profil">Profil</a>
+      <a href="#competences">Compétences</a>
+      <a href="#projets">Projets</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="profil">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="line"></span>Développeuse web junior · Maroc</div>
+        <h1>Nadia <em>Ouchchikh</em></h1>
+        <p class="lead">
+          Master en Systèmes Embarqués et Services Numériques. Je construis des applications
+          web complètes — du capteur à l'interface — avec Angular, React, Spring Boot et Django.
+          Autonome, curieuse, et à l'aise aussi bien sur le front que sur le back.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:ouchinadia170@gmail.com">Me contacter</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/nadia-ouchchikh" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="#projets">Voir les projets</a>
+        </div>
+      </div>
+
+      <div class="portrait">
+        <img src="nadia.jpg" alt="Portrait de Nadia Ouchchikh">
+        <div class="portrait-tag"><i></i>Disponible</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider wrap"><span class="l"></span><span class="mark"></span><span class="r"></span></div>
+
+  <!-- STATS -->
+  <section>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><div class="num">4</div><div class="label">Frameworks front / back</div></div>
+        <div class="stat"><div class="num">4</div><div class="label">Systèmes de bases de données</div></div>
+        <div class="stat"><div class="num">2</div><div class="label">Projets full-stack</div></div>
+        <div class="stat"><div class="num">4</div><div class="label">Langues parlées</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="competences">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Compétences</div>
+        <h2>Ce que je maîtrise</h2>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <h3>Front-End</h3>
+          <div class="chip-row">
+            <span class="chip">HTML</span><span class="chip">CSS</span>
+            <span class="chip">JavaScript</span><span class="chip">Angular</span>
+            <span class="chip">React</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Back-End</h3>
+          <div class="chip-row">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span>
+            <span class="chip">Django</span><span class="chip">Node.js</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Bases de données</h3>
+          <div class="chip-row">
+            <span class="chip">MySQL</span><span class="chip">MongoDB</span>
+            <span class="chip">Oracle SQL</span><span class="chip">Cassandra</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Outils & environnement</h3>
+          <div class="chip-row">
+            <span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Azure</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Autres langages</h3>
+          <div class="chip-row">
+            <span class="chip">Python</span><span class="chip">C</span>
+            <span class="chip">C++</span><span class="chip">Android</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Domaine</h3>
+          <div class="chip-row">
+            <span class="chip">Systèmes embarqués</span><span class="chip">IoT</span>
+            <span class="chip">Services numériques</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider wrap"><span class="l"></span><span class="mark"></span><span class="r"></span></div>
+
+  <!-- PROJECTS -->
+  <section id="projets">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Projets</div>
+        <h2>Ce que j'ai construit</h2>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <span class="proj-tag">Projet académique · Full-stack</span>
+          <h3>Gestion Médicale</h3>
+          <p>Application web de prise et gestion de rendez-vous médicaux. Intégration complète
+          front-end / back-end avec gestion des données utilisateurs.</p>
+          <div class="proj-stack">
+            <span class="chip">Spring Boot</span><span class="chip">Angular</span><span class="chip">MySQL</span>
+          </div>
+          <div class="repo-note">→ code source : <a href="https://github.com/NA35208/gestion-medicale" target="_blank" rel="noopener">github.com/NA35208/gestion-medicale</a></div>
+        </div>
+        <div class="proj-card">
+          <span class="proj-tag">Projet académique · IoT</span>
+          <h3>Agriculture Intelligente — Dashboard IoT</h3>
+          <p>Tableau de bord web pour la visualisation en temps réel de données capteurs
+          (pH, humidité, luminosité), avec flux de données back-end vers une interface claire.</p>
+          <div class="proj-stack">
+            <span class="chip">JavaScript</span><span class="chip">Dashboard temps réel</span><span class="chip">Capteurs IoT</span>
+          </div>
+          <div class="repo-note">→ code source : <a href="https://github.com/NA35208/my-iot-app" target="_blank" rel="noopener">github.com/NA35208/my-iot-app</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider wrap"><span class="l"></span><span class="mark"></span><span class="r"></span></div>
+
+  <!-- EXPERIENCE & FORMATION -->
+  <section id="parcours">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Expérience</div>
+        <h2>Parcours professionnel</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2025 · Temara</div>
+          <h3>Stage de fin d'études — AIS Technology</h3>
+          <p>Conception et développement d'un système intelligent de surveillance industrielle
+          pour la maintenance préventive, incluant des interfaces de visualisation de données
+          capteurs IoT.</p>
+          <div class="demo-links">
+            <a href="https://monitor.aistechnology.ma/" target="_blank" rel="noopener">↗ Monitor</a>
+            <a href="https://sr.aistechnology.ma/" target="_blank" rel="noopener">↗ SR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Formation</div>
+        <h2>Diplômes</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2023 – 2025</div>
+          <h3>Master en Systèmes Embarqués et Services Numériques</h3>
+          <p>FSA, Ait Melloul</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2020 – 2023</div>
+          <h3>Licence en Sciences Mathématiques et Informatique</h3>
+          <p>Agadir</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2019 – 2020</div>
+          <h3>Baccalauréat, Sciences Mathématiques A</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider wrap"><span class="l"></span><span class="mark"></span><span class="r"></span></div>
+
+  <!-- LANGUAGES -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Langues</div>
+        <h2>Communication</h2>
+      </div>
+      <div class="lang-list">
+        <div class="lang-row"><span class="lang-name">Français</span><div class="lang-bar"><i style="width:95%"></i></div><span class="lang-level">Courant</span></div>
+        <div class="lang-row"><span class="lang-name">Arabe</span><div class="lang-bar"><i style="width:95%"></i></div><span class="lang-level">Courant</span></div>
+        <div class="lang-row"><span class="lang-name">Amazigh</span><div class="lang-bar"><i style="width:95%"></i></div><span class="lang-level">Courant</span></div>
+        <div class="lang-row"><span class="lang-name">Anglais</span><div class="lang-bar"><i style="width:55%"></i></div><span class="lang-level">Intermédiaire</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <h2>Travaillons ensemble.</h2>
+        <p>Disponible pour un poste de développeuse web débutante — front-end, back-end,
+        ou les deux. Réponse rapide par e-mail.</p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:ouchinadia170@gmail.com">ouchinadia170@gmail.com</a>
+        <a href="tel:+212616432630">(+212) 616 43 26 30</a>
+        <a href="https://www.linkedin.com/in/nadia-ouchchikh" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <span>Maroc</span>
+      </div>
+    </div>
+    <div class="status-line">
+      <span>© 2026 Nadia Ouchchikh</span>
+      <span>portfolio · v2</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
